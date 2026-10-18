@@ -1,0 +1,18 @@
+import { useState } from "react";
+import TodosList from "../components/TodosList";
+import AddTodoForm from "../components/AddTodoForm";
+import type { Tab } from "../types/Tab";
+import Tabs from "../components/Tabs";
+
+const TodosPage = () => {
+    const [activeTab, setActiveTab] = useState<Tab>("todos");
+
+    return (
+        <>
+            <Tabs setActiveTab={setActiveTab} />
+            {activeTab === "todos" ? <TodosList /> : <AddTodoForm />}
+        </>
+    );
+};
+
+export default TodosPage;
