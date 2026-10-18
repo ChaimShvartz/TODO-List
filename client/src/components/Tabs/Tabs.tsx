@@ -1,5 +1,5 @@
 import type { Tab } from "../../types/Tab";
-import "./Tabs.css";
+import styles from "./Tabs.module.css";
 
 interface TabsProps {
     activeTab: Tab;
@@ -8,19 +8,19 @@ interface TabsProps {
 
 const Tabs = ({ setActiveTab, activeTab }: TabsProps) => {
     return (
-        <div id="container">
+        <div id={styles.container}>
             <button
                 type="button"
-                id={activeTab === "todos" ? "activeTab" : undefined}
-                className="tab"
+                id={activeTab === "todos" ? styles.activeTab : undefined}
+                className={styles.tab}
                 onClick={() => setActiveTab("todos")}
-                >
+            >
                 TODOs List
             </button>
             <button
                 type="button"
-                id={activeTab === "addTodo" ? "activeTab" : undefined}
-                className="tab"
+                id={activeTab === "addTodo" ? styles.activeTab : undefined}
+                className={styles.tab}
                 onClick={() => setActiveTab("addTodo")}
             >
                 Add TODO
