@@ -25,10 +25,12 @@ const TodosPage = () => {
                     <button type="button" onClick={removeDoneTodos}>
                         Remove Done Todos
                     </button>
-                    <TodosList todos={todos} />
+                    <TodosList
+                        todos={todos.sort((a, b) => +a.isDone - +b.isDone)}
+                    />
                 </>
             ) : (
-                <AddTodoForm/>
+                <AddTodoForm />
             )}
         </>
     );
