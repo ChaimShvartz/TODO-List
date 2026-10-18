@@ -7,7 +7,7 @@ interface TodosStore {
     addTodo: (newTodo: Todo) => void;
     removeTodo: (id: number) => void;
     toggleTodoDone: (id: number) => void;
-    updateTodo: (id: number, data: Partial<Todo>) => void;
+    updateTodo: (id: number, data: Partial<Omit<Todo, 'id' | 'isDone'>>) => void;
     removeDoneTodos: () => void;
     clearTodos: () => void;
 }
@@ -45,7 +45,7 @@ export const useTodosStore = create<TodosStore>()(
                         t.id === id ? { ...t, isDone: !t.isDone } : t,
                     ),
                 })),
-            updateTodo: (id: number, data: Partial<Todo>) =>
+            updateTodo: (id: number, data: Partial<Omit<Todo, 'id' | 'isDone'>>) =>
                 set(({ todos }) => ({
                     todos: todos.map((t) =>
                         t.id === id ? { ...t, ...data } : t,
