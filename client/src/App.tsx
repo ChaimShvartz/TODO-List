@@ -1,8 +1,5 @@
+import TodosPage from "./pages/TodosPage";
 
-const App = () => {
-  return (
-    <div>App</div>
-  )
-}
+const App = () => <TodosPage />;
 
-export default App
+export default App;
