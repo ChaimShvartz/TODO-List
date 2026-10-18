@@ -1,5 +1,6 @@
-import { useTodosStore } from "../store/useTodosStore";
-import type { Todo } from "../types/Todo";
+import { useTodosStore } from "../../store/useTodosStore";
+import type { Todo } from "../../types/Todo";
+import styles from "./TodosList.module.css";
 
 const TodosList = () => {
     const todos = useTodosStore((state) => state.todos).sort(
@@ -33,12 +34,22 @@ const TodosList = () => {
     };
     return (
         <>
-            <button type="button" onClick={clearTodos}>
-                Remove All
-            </button>
-            <button type="button" onClick={removeDoneTodos}>
-                Remove Done Todos
-            </button>
+            <div id={styles.container}>
+                <button
+                    type="button"
+                    className={styles.removeBtn}
+                    onClick={clearTodos}
+                >
+                    Remove All
+                </button>
+                <button
+                    type="button"
+                    className={styles.removeBtn}
+                    onClick={removeDoneTodos}
+                >
+                    Remove Done Todos
+                </button>
+            </div>
             <table>
                 <caption>TODO List</caption>
                 <thead>
