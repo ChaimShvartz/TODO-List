@@ -1,0 +1,47 @@
+import React, { useState } from "react";
+import type { Todo } from "../types/Todo";
+import { useTodosStore } from "../store/useTodosStore";
+
+type TodoForm = Omit<Todo, "id" | "isDone">;
+
+const AddTodoForm = () => {
+    const [form, setForm] = useState<TodoForm>({ title: "", description: "" });
+    const addTodo = useTodosStore((state) => state.addTodo);
+    const todos = useTodosStore((state) => state.todos);
+    const onSubmit = (e: React.SubmitEvent) => {
+        e.preventDefault();
+        const id = Math.max(...todos.map((t) => t.id), 0) + 1;
+        addTodo({ id, ...form, isDone: false });
+        alert("The TODO added successfully");
+    };
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setForm((prev) => ({ ...prev, [name]: value }));
+    };
+    return (
+        <form onSubmit={onSubmit}>
+            <label>
+                Title
+                <input
+                    type="text"
+                    name="title"
+                    value={form.title}
+                    onChange={onChange}
+                    autoFocus
+                />
+            </label>
+            <label>
+                Description
+                <input
+                    type="text"
+                    name="description"
+                    value={form.description}
+                    onChange={onChange}
+                />
+            </label>
+            <button type="submit">Submit</button>
+        </form>
+    );
+};
+
+export default AddTodoForm;
