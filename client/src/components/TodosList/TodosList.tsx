@@ -1,5 +1,6 @@
 import { useTodosStore } from "../../store/useTodosStore";
 import type { Todo } from "../../types/Todo";
+import TodoItem from "../TodoItem/TodoItem";
 import styles from "./TodosList.module.css";
 
 const TodosList = () => {
@@ -8,33 +9,11 @@ const TodosList = () => {
     );
     const clearTodos = useTodosStore((state) => state.clearTodos);
     const removeDoneTodos = useTodosStore((state) => state.removeDoneTodos);
-    const removeTodo = useTodosStore((state) => state.removeTodo);
-    const toggleTodoDone = useTodosStore((state) => state.toggleTodoDone);
-    const renderTodo = (todo: Todo) => {
-        const { id, title, description, isDone } = todo;
-        return (
-            <tr key={id}>
-                <td>{title}</td>
-                <td>{description}</td>
-                <td>
-                    <input
-                        type="checkbox"
-                        onChange={() => toggleTodoDone(id)}
-                        checked={isDone}
-                    ></input>
-                </td>
+    const renderTodo = (todo: Todo) => <TodoItem key={todo.id} todo={todo} />;
 
-                <td>
-                    <button type="button" onClick={() => removeTodo(id)}>
-                        Remove
-                    </button>
-                </td>
-            </tr>
-        );
-    };
     return (
         <>
-            <div id={styles.container}>
+            <div id={styles.btnsContainer}>
                 <button
                     type="button"
                     className={styles.removeBtn}
@@ -50,17 +29,7 @@ const TodosList = () => {
                     Remove Done Todos
                 </button>
             </div>
-            <table>
-                <caption>TODO List</caption>
-                <thead>
-                    <tr>
-                        <td>Title</td>
-                        <td>Dscription</td>
-                        <td>Is Done?</td>
-                    </tr>
-                </thead>
-                <tbody>{todos.map(renderTodo)}</tbody>
-            </table>
+            <ul id={styles.todosContainer}>{todos.map(renderTodo)}</ul>
         </>
     );
 };

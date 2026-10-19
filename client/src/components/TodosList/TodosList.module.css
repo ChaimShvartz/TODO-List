@@ -1,4 +1,4 @@
-#container{
+#btnsContainer{
     display: flex;
     gap: 25px;
     margin-left: 20px ;
@@ -7,5 +7,16 @@
 .removeBtn{
     width: 150px;
     height: 30px;
+    background: none;
+    border: 1px solid blue;
 }
 
+.removeBtn:hover{
+    background: gainsboro;
+}
+
+#todosContainer{
+    display: grid;
+    row-gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 300px)) ;
+}
