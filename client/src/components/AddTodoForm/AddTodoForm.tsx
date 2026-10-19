@@ -4,9 +4,10 @@ import { useTodosStore } from "../../store/useTodosStore";
 import styles from "./AddTodoForm.module.css";
 
 type TodoForm = Omit<Todo, "id" | "isDone">;
+const INITIAL_FORM = { title: "", description: "" };
 
 const AddTodoForm = () => {
-    const [form, setForm] = useState<TodoForm>({ title: "", description: "" });
+    const [form, setForm] = useState<TodoForm>(INITIAL_FORM);
     const addTodo = useTodosStore((state) => state.addTodo);
     const todos = useTodosStore((state) => state.todos);
     const onSubmit = (e: React.SubmitEvent) => {
@@ -14,6 +15,7 @@ const AddTodoForm = () => {
         const id = Math.max(...todos.map((t) => t.id), 0) + 1;
         addTodo({ id, ...form, isDone: false });
         alert(`TODO: '${form.title}' added successfully`);
+        setForm(INITIAL_FORM);
     };
     const onChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
