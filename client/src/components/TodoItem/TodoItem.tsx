@@ -12,7 +12,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
     const { id, title, description, isDone } = todo;
     const removeTodo = useTodosStore((state) => state.removeTodo);
     const toggleTodoDone = useTodosStore((state) => state.toggleTodoDone);
-    
+
     return (
         <li>
             <article className={styles.todo}>
@@ -27,7 +27,10 @@ const TodoItem = ({ todo }: TodoItemProps) => {
                     type="button"
                     className={btnStyles.removeBtn}
                     id={styles.removeTodoBtn}
-                    onClick={() => removeTodo(id)}
+                    onClick={() => {
+                        removeTodo(id);
+                        alert(`TODO: '${title}' deleted successfully`);
+                    }}
                 >
                     🗑️ Remove
                 </button>

@@ -13,7 +13,7 @@ const AddTodoForm = () => {
         e.preventDefault();
         const id = Math.max(...todos.map((t) => t.id), 0) + 1;
         addTodo({ id, ...form, isDone: false });
-        alert("The TODO added successfully");
+        alert(`TODO: '${form.title}' added successfully`);
     };
     const onChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
