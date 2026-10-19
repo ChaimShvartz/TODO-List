@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import type { Todo } from "../types/Todo";
-import { useTodosStore } from "../store/useTodosStore";
+import type { Todo } from "../../types/Todo";
+import { useTodosStore } from "../../store/useTodosStore";
+import styles from "./AddTodoForm.module.css";
 
 type TodoForm = Omit<Todo, "id" | "isDone">;
 
@@ -14,31 +15,29 @@ const AddTodoForm = () => {
         addTodo({ id, ...form, isDone: false });
         alert("The TODO added successfully");
     };
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
         const { name, value } = e.target;
         setForm((prev) => ({ ...prev, [name]: value }));
     };
     return (
-        <form onSubmit={onSubmit}>
-            <label>
-                Title
-                <input
-                    type="text"
-                    name="title"
-                    value={form.title}
-                    onChange={onChange}
-                    autoFocus
-                />
-            </label>
-            <label>
-                Description
-                <input
-                    type="text"
-                    name="description"
-                    value={form.description}
-                    onChange={onChange}
-                />
-            </label>
+        <form id={styles.addTodoForm} onSubmit={onSubmit}>
+            <label>Title</label>
+            <input
+                type="text"
+                name="title"
+                value={form.title}
+                onChange={onChange}
+                autoFocus
+            />
+            <label>Description</label>
+            <textarea
+                name="description"
+                value={form.description}
+                rows={5}
+                onChange={onChange}
+            />
             <button type="submit">Submit</button>
         </form>
     );
