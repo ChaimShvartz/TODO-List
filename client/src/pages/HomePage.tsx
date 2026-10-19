@@ -9,8 +9,8 @@ const TodosPage = () => {
 
     return (
         <>
-            <Tabs setActiveTab={setActiveTab} activeTab={activeTab}/>
-            {activeTab === "todos" ? <TodosList /> : <AddTodoForm />}
+            <Tabs setActiveTab={setActiveTab} activeTab={activeTab} />
+            {activeTab === "todos" ? <TodosList /> : <AddTodoForm onFinish={()=>setActiveTab('todos')}/>}
         </>
     );
 };

@@ -5,8 +5,11 @@ import styles from "./AddTodoForm.module.css";
 
 type TodoForm = Omit<Todo, "id" | "isDone">;
 const INITIAL_FORM = { title: "", description: "" };
+interface AddTodoFormProps {
+    onFinish: () => void;
+}
 
-const AddTodoForm = () => {
+const AddTodoForm = ({ onFinish }: AddTodoFormProps) => {
     const [form, setForm] = useState<TodoForm>(INITIAL_FORM);
     const addTodo = useTodosStore((state) => state.addTodo);
     const todos = useTodosStore((state) => state.todos);
@@ -16,6 +19,7 @@ const AddTodoForm = () => {
         addTodo({ id, ...form, isDone: false });
         alert(`TODO: '${form.title}' added successfully`);
         setForm(INITIAL_FORM);
+        onFinish()
     };
     const onChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
